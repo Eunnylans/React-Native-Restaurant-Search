@@ -18,12 +18,12 @@ export default function App() {
     { name: "Steak", imageUrl: require("../assets/images/steak.png") },
   ];
 
-  setTimeout(() => {
+   { /*setTimeout(() => {
     console.log("Initial Term:", term);
     setTerm("Pizza");
     console.log("After Change Term:", term);
-  }, 3000);
-
+  }, 3000); */}
+  
   return (
     <View style={styles.container}>
       <Header />
@@ -38,6 +38,7 @@ export default function App() {
               imageUrl={item.imageUrl}
               index={index}
               active={item.name === term}
+              handlePress={() => setTerm(item.name)}
             />
           );
         }}
