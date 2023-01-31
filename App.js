@@ -1,8 +1,9 @@
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import { FlatList, StyleSheet, View } from "react-native";
-import CategoryItem from "./src/components/CategoryItem";
+import { StyleSheet, View } from "react-native";
+import Categories from "./src/components/Categories";
 import Header from "./src/components/Header";
+import Restaurants from './src/components/Restaurants';
 import Search from "./src/components/Search";
 
 export default function App() {
@@ -18,36 +19,21 @@ export default function App() {
     { name: "Steak", imageUrl: require("../assets/images/steak.png") },
   ];
 
-   { /*setTimeout(() => {
+  {
+    /* setTimeout(() => {
     console.log("Initial Term:", term);
     setTerm("Pizza");
     console.log("After Change Term:", term);
-  }, 3000); */}
-  
+  }, 3000); */
+  }
+
   return (
     <View style={styles.container}>
       <Header />
-      <Search />
-      <FlatList
-        data={commonCategories}
-        renderItem={({ item, index }) => {
-          // console.log(item)
-          return (
-            <CategoryItem
-              name={item.name}
-              imageUrl={item.imageUrl}
-              index={index}
-              active={item.name === term}
-              handlePress={() => setTerm(item.name)}
-            />
-          );
-        }}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        keyExtractor={(category) => category.name}
-      />
-
+      <Search setTerm={setTerm} />
       <StatusBar style="auto" />
+      <Categories categories={commonCategories} setTerm={setTerm} term={term} />
+      <Restaurants />
     </View>
   );
 }
