@@ -1,43 +1,19 @@
-import { StatusBar } from "expo-status-bar";
-import { useState } from "react";
-import { StyleSheet, View } from "react-native";
-import Categories from "./src/components/Categories";
-import Header from "./src/components/Header";
-import Restaurants from './src/components/Restaurants';
-import Search from "./src/components/Search";
+import { createAppContainer } from "react-navigation";
+import { createStackNavigator } from "react-navigation-stack";
+import HomeScreen from "./src/screens/HomeScreen";
+import RestaurantScreen from "./src/screens/RestaurantScreen";
 
-export default function App() {
-  const [term, setTerm] = useState("Burger");
-
-  //FlatList: rendering multiple items
-  const commonCategories = [
-    { name: "Burger", imageUrl: require("../assets/images/burger.png") },
-    { name: "Cake", imageUrl: require("../assets/images/cake.png") },
-    { name: "Pasta", imageUrl: require("../assets/images/pasta.png") },
-    { name: "Pizza", imageUrl: require("../assets/images/pizza.png") },
-    { name: "Smoothies", imageUrl: require("../assets/images/smoothies.png") },
-    { name: "Steak", imageUrl: require("../assets/images/steak.png") },
-  ];
-
+const navigator = createStackNavigator(
   {
-    /* setTimeout(() => {
-    console.log("Initial Term:", term);
-    setTerm("Pizza");
-    console.log("After Change Term:", term);
-  }, 3000); */
+    Home: HomeScreen,
+    Restaurant: RestaurantScreen,
+  },
+  {
+    initialRouteName: "Home",
+    defaultNavigationOptions: {
+      title: "BusinessSearch",
+    },
   }
+);
 
-  return (
-    <View style={styles.container}>
-      <Header />
-      <Search setTerm={setTerm} />
-      <StatusBar style="auto" />
-      <Categories categories={commonCategories} setTerm={setTerm} term={term} />
-      <Restaurants />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {},
-});
+export default createAppContainer(navigator);
